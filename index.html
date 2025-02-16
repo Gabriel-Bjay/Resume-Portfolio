@@ -13,11 +13,11 @@
             <nav>
                 <img src="" alt="" srcset="" class="logo">
                 <ul id="sideMenu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <i class="fa-solid fa-times" onclick="closeMenu()"></i>
                 </ul>
                 <i class="fa-solid fa-bars" onclick="openMenu()"></i>
@@ -143,12 +143,13 @@
                     <a href="images/My CV.docx" download class="btn btn2">Download CV</a>
                 </div>
                 <div class="contact-right">
-                    <form>
+                    <form name="submit-to-google-sheet">
                         <input type="text" name="Name" placeholder="Your Name">
-                        <input type="email" name="email" placeholder="Your Email">
+                        <input type="email" name="Email" placeholder="Your Email">
                         <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
                         <button type="submit" class="btn btn2">Submit</button>
                     </form>
+                    <span id="msg"></span>
                 </div>
             </div>
         </div>
@@ -182,5 +183,23 @@
             sideMenu.style.right = '-200px';
         }
     </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxodKEiiLNQHRBK3q6zmqE2GWk8cLmaVW_1r8B8D8HVUV4_FHnIt69Bk6FcCrseEoDn/exec   '
+        const form = document.forms['submit-to-google-sheet']
+        const msgElement = document.getElementById('msg')
+
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msgElement.innerHTML = "Messege sent successfully"
+                setTimeout(() => {
+                    msgElement.innerHTML = ""
+                }, 5000);
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 </body>
 </html>
