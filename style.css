@@ -363,7 +363,69 @@ form .btn2{
     color: #ff004f;
 }
 
+nav .fa-solid{
+    display: none;
+}
+
 /* ---------Screen responsiveness--------- */
 @media only screen and (max-width: 600px){
-
+    #header{
+        background-image: url(images/background.png.jpeg);
+    }
+    .header-text h1{
+        font-size: 40px;
+    }
+    .header-text{
+        margin-top: 100%;
+        font-size: 16px ;
+    }
+    nav .fa-solid{
+        display: block;
+        font-size: 25px;
+        color: #fff;
+        cursor: pointer;
+    }
+    nav ul{
+        position: fixed;
+        width: 200px;
+        top: 0;
+        right: -200px;
+        background: #ff004f;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 25px;
+    }
+    nav ul .fa-solid {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        cursor: pointer;
+    }
+    .subtitle {
+        font-size: 40px;
+    }
+    .about-col-1 , .about-col-2{
+        flex-basis: 100%;
+    }
+    .about-col-1{
+        margin-bottom: 30px;
+    }
+    .about-col-2{
+        font-size: 14px;
+    }
+    .tab-links{
+        font-size: 16px;
+        margin-right: 20px;
+    }
+    .contact-left, .contact-right{
+        flex-basis: 100%;
+    }
+    .copy-right{
+        font-size: 14px;
+    }
 }
