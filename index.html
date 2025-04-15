@@ -8,9 +8,14 @@
     <script src="https://kit.fontawesome.com/383b5a9765.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav>
+    <!-- --------------header----------------- -->
+    <header id="header">
+        <div class="container1">
+            <!-- ----------------navbar----------------- -->
+            <nav class="navbar">
+                <div class="logo-container">
+                    <img src="images/Logo.png" alt="Logo" class="logo">
+                </div>
                 <img src="" alt="" srcset="" class="logo">
                 <ul id="sideMenu">
                     <li><a href="#header">Home</a></li>
@@ -23,48 +28,40 @@
                 <i class="fa-solid fa-bars" onclick="openMenu()"></i>
             </nav>
             <div class="header-text">
-                <p>UI/UX Designer</p>
-                <h1>Hey, I'm <span>Bjay</span><br>Makara from Kenya.</h1>
+                <p>SOFTWARE <br> DEVELOPER</p>
+                <h1>Hey, I'm <span>Bjay</span><br><span style="color: white;">Makara</span> from Kenya.</h1>
             </div>
         </div>
-    </div>
-    <!-- --------------about----------------- -->   
+    </header>
+    <!-- --------------about me section----------------- -->   
     <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1">
-                    <img src="images/background.png.jpeg" alt="">
+        <div class="container about-container">
+            <h1 class="subtitle">About Me</h1>
+            <p class="about-description">Highly motivated and results-oriented recent graduate with a full-stack software development certificate from Zindua School. Currently pursuing a Bachelor's degree in Computer Science at Riara University, Kenya. Seeking an entry-level software development position to leverage strong technical skills and problem-solving abilities. Eager to apply academic knowledge and practical experience to contribute to innovative projects and collaborate effectively within a dynamic team.</p>
+            <div class="about-cards">
+                <div class="about-card">
+                    <h2 class="abt-header">Skills</h2>
+                    <ul>
+                    <li><span>UI/UX</span><br>Designing Web App interfaces</li>
+                    <li><span>Web Development</span><br>Web App Development</li>
+                    <li><span>App Development</span><br>Building Android/IOS apps.</li>
+                    </ul>
                 </div>
-                <div class="about-col-2">
-                    <h1 class="subtitle">About me</h1>
-                    <p>Highly motivated and results-oriented recent graduate with a full-stack software development certificate from Zindua School. Currently pursuing a Bachelor's degree in Computer Science at Riara University, Kenya. Seeking an entry-level software development position to leverage strong technical skills and problem-solving abilities. Eager to apply academic knowledge and practical experience to contribute to innovative projects and collaborate effectively within a dynamic team</p>
-                    <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                        <p class="tab-links" onclick="opentab('education')">Education</p>
-                    </div>
-                    <div class="tab-contents active-tab" id="skills">
-                        <ul>
-                            <li><span>UI/UX</span><br>Designing Web App interfaces</li>
-                            <li><span>Web Development</span><br>Web App Development</li>
-                            <li><span>App Development</span><br>Building Android/IOS apps.</li>
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="experience">
-                        <ul>
-                            <li><span>UI/UX</span><br>Designing Web App interfaces</li>
-                            <li><span>Web Development</span><br>Web App Development</li>
-                            <li><span>App Development</span><br>Building Android/IOS apps.</li>
-                        </ul>
-                    </div>
-                    <div class="tab-contents" id="education">
-                        <ul>
-                            <li><span>2023</span><br>Full Stack Web Development From Zindua School</li>
-                            <li><span>2023-Current</span><br>BCS From Riara University.</li>
-                        </ul>
-                    </div>
+                <div class="about-card">
+                    <h2 class="abt-header">Experience</h2>
+                    <ul>
+                    <li><span>UI/UX</span><br>Designing Web App interfaces</li>
+                    <li><span>Web Development</span><br>Web App Development</li>
+                    <li><span>App Development</span><br>Building Android/IOS apps.</li>
+                    </ul>
                 </div>
-
+                <div class="about-card">
+                    <h2 class="abt-header">Education</h2>
+                    <ul>
+                    <li><span>2023</span><br>Full Stack Web Development From Zindua School</li>
+                    <li><span>2023-Current</span><br>BCS From Riara University.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -144,7 +141,7 @@
                     <a href="images/My CV.docx" download class="btn btn2">Download CV</a>
                 </div>
                 <div class="contact-right">
-                    <form name="submit-to-google-sheet">
+                    <form name="">
                         <input type="text" name="Name" placeholder="Your Name" required>
                         <input type="email" name="Email" placeholder="Your Email" required>
                         <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
@@ -185,27 +182,5 @@
             sideMenu.style.right = '-200px';
         }
     </script>
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpdwWwU1CZKB5uTr1RLGZuPtfoLB3tUSf4zEuLQykNZJOu7WIaNvmu7ZBHMvA0H1yT/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const msgElement = document.getElementById('msg')
-
-        form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(response => {
-                msgElement.innerHTML = "Message sent successfully!";
-                setTimeout(() => {
-                    msgElement.innerHTML = "";
-                }, 5000);
-                form.reset();
-            })
-            .catch(error => {
-                msgElement.innerHTML = "Error sending message. Please try again.";
-                console.error('Error!', error.message);
-            });
-    });
-      </script>
 </body>
 </html>
