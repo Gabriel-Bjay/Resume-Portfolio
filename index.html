@@ -1,186 +1,724 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio Website</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/383b5a9765.js" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bjay Makara — Backend & Systems Engineer, Nairobi</title>
+<meta name="description" content="I build systems where correctness matters: rental ledgers that balance, allocation engines that explain themselves, and data models that make bad states impossible. Laravel, Django, Angular, Next.js.">
+<meta name="author" content="Bjay Makara">
+
+<!-- Open Graph / social sharing. TODO: replace og:url and og:image once deployed. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bjay Makara — Backend & Systems Engineer">
+<meta property="og:description" content="Rental ledgers that balance, allocation engines that explain themselves, and data models that make bad states impossible.">
+<meta property="og:url" content="https://gabriel-bjay.github.io/Resume-Portfolio/">
+<meta property="og:image" content="https://gabriel-bjay.github.io/Resume-Portfolio/images/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Inline SVG favicon: no extra file, no request -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E3038'/%3E%3Cpath d='M9 22V10h5.6c2.3 0 3.7 1.1 3.7 3 0 1.4-.8 2.4-2 2.8 1.5.3 2.5 1.4 2.5 3 0 2-1.5 3.2-4 3.2H9Z' fill='%23D9A13B'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,600;12..96,75..100,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --petrol:#0E3038;
+    --petrol-deep:#082126;
+    --petrol-line:#1D454E;
+    --paper:#E7EAE9;
+    --paper-warm:#DDE2E0;
+    --ink:#0B1A1E;
+    --ink-soft:#405056;
+    --brass:#D9A13B;
+    --verdigris:#4E9E97;
+    --rose:#C05A6B;
+
+    --display:'Bricolage Grotesque',Georgia,serif;
+    --body:'Instrument Sans',system-ui,-apple-system,sans-serif;
+
+    --measure:64ch;
+    --gutter:clamp(1.25rem,5vw,5rem);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation:none!important;transition:none!important}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:clamp(1rem,.95rem + .2vw,1.0625rem);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  :focus-visible{
+    outline:2px solid var(--brass);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:78rem;
+    margin-inline:auto;
+    padding-inline:var(--gutter);
+  }
+
+  .skip{
+    position:absolute;left:-9999px;top:0;
+    background:var(--brass);color:var(--petrol-deep);
+    padding:.6rem 1rem;font-weight:600;z-index:99;
+  }
+  .skip:focus{left:0}
+
+  /* ---------- masthead ---------- */
+
+  .masthead{
+    background:var(--petrol);
+    color:var(--paper);
+    padding-block:clamp(2rem,6vw,3.5rem) clamp(3rem,8vw,5.5rem);
+    border-bottom:1px solid var(--petrol-line);
+  }
+
+  .topbar{
+    display:flex;flex-wrap:wrap;gap:1rem 2rem;
+    align-items:baseline;justify-content:space-between;
+    padding-bottom:clamp(3rem,10vw,6rem);
+  }
+
+  .sig{
+    font-family:var(--display);
+    font-weight:600;font-size:1.0625rem;
+    letter-spacing:.01em;
+  }
+
+  .topnav{display:flex;gap:1.75rem;font-size:.9375rem}
+  .topnav a{
+    color:#B7C6C6;text-decoration:none;
+    padding-bottom:2px;border-bottom:1px solid transparent;
+  }
+  .topnav a:hover,.topnav a:focus-visible{color:var(--paper);border-bottom-color:var(--brass)}
+
+  .lede{max-width:34ch}
+
+  .lede h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(2.75rem,9vw,5.5rem);
+    line-height:.94;
+    letter-spacing:-.025em;
+    margin:0;
+    font-variation-settings:'wdth' 92;
+  }
+
+  .thesis{
+    max-width:52ch;
+    margin:clamp(1.5rem,4vw,2.25rem) 0 0;
+    font-size:clamp(1.125rem,1rem + .6vw,1.4375rem);
+    line-height:1.45;
+    color:#C9D6D5;
+  }
+  .thesis b{color:var(--paper);font-weight:500}
+
+  /* ---------- ledger strip: the hero's characteristic element ---------- */
+
+  .ledger{
+    margin-top:clamp(3rem,8vw,5rem);
+    border-top:1px solid var(--petrol-line);
+  }
+
+  .ledger-row{
+    display:grid;
+    grid-template-columns:minmax(0,10rem) minmax(0,1fr) minmax(0,7rem);
+    gap:.5rem 2rem;
+    align-items:baseline;
+    padding:1.15rem 0;
+    border-bottom:1px solid var(--petrol-line);
+    opacity:0;
+    animation:settle .5s ease forwards;
+  }
+  .ledger-row:nth-child(1){animation-delay:.1s}
+  .ledger-row:nth-child(2){animation-delay:.22s}
+  .ledger-row:nth-child(3){animation-delay:.34s}
+
+  @keyframes settle{
+    from{opacity:0;transform:translateY(6px)}
+    to{opacity:1;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ledger-row{opacity:1;transform:none}
+  }
+
+  .ledger-key{
+    font-family:var(--display);
+    font-weight:600;font-size:1.0625rem;
+    color:var(--paper);
+  }
+  .ledger-val{color:#A9BBBB;font-size:.9375rem;line-height:1.45}
+  .ledger-fig{
+    font-variant-numeric:tabular-nums;
+    color:var(--brass);
+    font-size:.9375rem;
+    font-weight:500;
+  }
+
+  @media (max-width:44rem){
+    .ledger-row{grid-template-columns:1fr;gap:.2rem;padding:1rem 0}
+    .ledger-fig{color:var(--verdigris)}
+  }
+
+  /* ---------- section scaffolding ---------- */
+
+  .band{padding-block:clamp(3.5rem,9vw,6rem)}
+  .band + .band{border-top:1px solid #C8D0CE}
+
+  .band-head{
+    display:flex;flex-wrap:wrap;gap:.5rem 2rem;
+    align-items:baseline;justify-content:space-between;
+    margin-bottom:clamp(2rem,5vw,3rem);
+  }
+
+  .band-head h2{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.75rem,1.2rem + 2vw,2.75rem);
+    letter-spacing:-.02em;
+    line-height:1;
+    margin:0;
+  }
+  .band-head p{margin:0;color:var(--ink-soft);font-size:.9375rem;max-width:38ch}
+
+  /* ---------- project records ---------- */
+
+  .record{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,19rem);
+    gap:clamp(2rem,5vw,4rem);
+    padding-block:clamp(2.5rem,6vw,3.75rem);
+    border-top:1px solid #C8D0CE;
+  }
+  .record:first-of-type{border-top:2px solid var(--petrol)}
+
+  @media (max-width:60rem){
+    .record{grid-template-columns:1fr;gap:2rem}
+  }
+
+  .record h3{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.5rem,1.1rem + 1.4vw,2.125rem);
+    letter-spacing:-.02em;
+    line-height:1.05;
+    margin:0 0 .35rem;
+  }
+
+  .record-sub{
+    margin:0 0 1.5rem;
+    color:var(--ink-soft);
+    font-size:.9375rem;
+  }
+
+  .record-body p{max-width:var(--measure);margin:0 0 1.1rem}
+  .record-body p:last-child{margin-bottom:0}
+
+  /* the one bold move: real code, in the open */
+  .hardpart{
+    margin:1.75rem 0 1.5rem;
+    background:var(--petrol);
+    color:var(--paper);
+    padding:clamp(1.25rem,3vw,1.75rem);
+    border-left:3px solid var(--brass);
+  }
+  .hardpart h4{
+    font-family:var(--display);
+    font-weight:600;font-size:1.0625rem;
+    margin:0 0 .6rem;
+  }
+  .hardpart p{
+    margin:0 0 1rem;color:#C2D0D0;font-size:.9375rem;
+    max-width:58ch;
+  }
+  .hardpart p:last-child{margin-bottom:0}
+
+  .hardpart pre{
+    margin:0 0 1rem;
+    overflow-x:auto;
+    background:var(--petrol-deep);
+    padding:.9rem 1rem;
+    font-size:.8125rem;
+    line-height:1.55;
+    color:#CFE0DE;
+    font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  .hardpart pre b{color:var(--brass);font-weight:600}
+  .hardpart pre i{color:#7E9694;font-style:normal}
+
+  /* spec column — aligned key/value rows, ledger logic */
+  .spec{font-size:.9375rem}
+
+  .spec dl{
+    margin:0;
+    border-top:1px solid #C0CAC7;
+  }
+  .spec div{
+    display:grid;
+    grid-template-columns:6.5rem 1fr;
+    gap:1rem;
+    padding:.7rem 0;
+    border-bottom:1px solid #D3DAD8;
+  }
+  .spec dt{color:var(--ink-soft);font-size:.875rem}
+  .spec dd{margin:0}
+
+  .spec-links{
+    display:flex;flex-wrap:wrap;gap:.65rem;
+    margin-top:1.25rem;
+  }
+
+  .lnk{
+    display:inline-block;
+    font-size:.875rem;font-weight:500;
+    text-decoration:none;
+    padding:.5rem .85rem;
+    border:1px solid var(--petrol);
+    color:var(--petrol);
+  }
+  .lnk:hover,.lnk:focus-visible{background:var(--petrol);color:var(--paper)}
+
+  .lnk-fill{background:var(--petrol);color:var(--paper)}
+  .lnk-fill:hover,.lnk-fill:focus-visible{background:var(--petrol-deep);color:var(--paper)}
+
+  /* honest placeholder — remove once shipped */
+  .pending{
+    display:inline-block;
+    font-size:.8125rem;
+    padding:.5rem .85rem;
+    border:1px dashed #A9B4B1;
+    color:#6A7875;
+  }
+
+  /* ---------- about ---------- */
+
+  .about-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,20rem);
+    gap:clamp(2rem,5vw,4rem);
+  }
+  @media (max-width:60rem){.about-grid{grid-template-columns:1fr}}
+
+  .about-grid > div > p{max-width:var(--measure);margin:0 0 1.1rem}
+
+  .facts{margin:0;border-top:1px solid #C0CAC7;font-size:.9375rem}
+  .facts div{
+    display:grid;grid-template-columns:5.5rem 1fr;gap:1rem;
+    padding:.7rem 0;border-bottom:1px solid #D3DAD8;
+  }
+  .facts dt{color:var(--ink-soft);font-size:.875rem}
+  .facts dd{margin:0}
+
+  /* ---------- contact ---------- */
+
+  .contact{
+    background:var(--petrol);
+    color:var(--paper);
+    padding-block:clamp(3.5rem,9vw,6rem);
+  }
+
+  .contact h2{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(1.75rem,1.2rem + 2vw,2.75rem);
+    letter-spacing:-.02em;line-height:1;margin:0 0 1rem;
+  }
+
+  .contact p{max-width:50ch;color:#C2D0D0;margin:0 0 2rem}
+
+  .reach{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+    gap:1.5rem 2rem;
+    border-top:1px solid var(--petrol-line);
+    padding-top:1.75rem;
+  }
+  .reach div{min-width:0}
+  .reach dt{color:#8FA5A4;font-size:.8125rem;margin-bottom:.3rem}
+  .reach dd{margin:0;font-size:1.0625rem;overflow-wrap:break-word}
+  .reach a{color:var(--brass);text-decoration:none;border-bottom:1px solid transparent}
+  .reach a:hover,.reach a:focus-visible{border-bottom-color:var(--brass)}
+
+  .foot{
+    margin-top:clamp(2.5rem,6vw,4rem);
+    padding-top:1.5rem;
+    border-top:1px solid var(--petrol-line);
+    font-size:.875rem;color:#8FA5A4;
+    display:flex;flex-wrap:wrap;gap:.5rem 2rem;justify-content:space-between;
+  }
+</style>
 </head>
 <body>
-    <!-- --------------header----------------- -->
-    <header id="header">
-        <div class="container1">
-            <!-- ----------------navbar----------------- -->
-            <nav class="navbar">
-                <div class="logo-container">
-                    <img src="images/Logo.png" alt="Logo" class="logo">
-                </div>
-                <img src="" alt="" srcset="" class="logo">
-                <ul id="sideMenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <i class="fa-solid fa-times" onclick="closeMenu()"></i>
-                </ul>
-                <i class="fa-solid fa-bars" onclick="openMenu()"></i>
-            </nav>
-            <div class="header-text">
-                <p>SOFTWARE <br> DEVELOPER</p>
-                <h1>Hey, I'm <span>Bjay</span><br><span style="color: white;">Makara</span> from Kenya.</h1>
-            </div>
-        </div>
-    </header>
-    <!-- --------------about me section----------------- -->   
-    <div id="about">
-        <div class="container about-container">
-            <h1 class="subtitle">About Me</h1>
-            <p class="about-description">Highly motivated and results-oriented recent graduate with a full-stack software development certificate from Zindua School. Currently pursuing a Bachelor's degree in Computer Science at Riara University, Kenya. Seeking an entry-level software development position to leverage strong technical skills and problem-solving abilities. Eager to apply academic knowledge and practical experience to contribute to innovative projects and collaborate effectively within a dynamic team.</p>
-            <div class="about-cards">
-                <div class="about-card">
-                    <h2 class="abt-header">Skills</h2>
-                    <ul>
-                    <li><span>UI/UX</span><br>Designing Web App interfaces</li>
-                    <li><span>Web Development</span><br>Web App Development</li>
-                    <li><span>App Development</span><br>Building Android/IOS apps.</li>
-                    </ul>
-                </div>
-                <div class="about-card">
-                    <h2 class="abt-header">Experience</h2>
-                    <ul>
-                    <li><span>UI/UX</span><br>Designing Web App interfaces</li>
-                    <li><span>Web Development</span><br>Web App Development</li>
-                    <li><span>App Development</span><br>Building Android/IOS apps.</li>
-                    </ul>
-                </div>
-                <div class="about-card">
-                    <h2 class="abt-header">Education</h2>
-                    <ul>
-                    <li><span>2023</span><br>Full Stack Web Development From Zindua School</li>
-                    <li><span>2023-Current</span><br>BCS From Riara University.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+<a class="skip" href="#work">Skip to projects</a>
+
+<header class="masthead">
+  <div class="wrap">
+
+    <div class="topbar">
+      <span class="sig">Bjay Makara</span>
+      <nav class="topnav" aria-label="Sections">
+        <a href="#work">Projects</a>
+        <a href="#about">Background</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-    <!-- ----------Services------------- -->
-     <div id="services">
-        <div class="container">
-            <h1 class="subtitle">My Services</h1>
-            <div class="services-list">
-                <div>
-                    <i class="fa-solid fa-code"></i>
-                    <h2>Web Design</h2>
-                    <p>Creating responsive, modern, and visually appealing websites that deliver seamless user interactions across all devices.</p>
-                    <a href="services.html">Learn more</a>
-                </div>
-                <div>
-                    <i class="fa-solid fa-crop-simple"></i>
-                    <h2>UI/UX Design</h2>
-                    <p>Crafting intuitive and engaging user experiences with a focus on aesthetics, functionality, and user-centric design principles.</p>
-                    <a href="services.html">Learn more</a>
-                </div>
-                <div>
-                    <i class="fa-brands fa-app-store"></i>
-                    <h2>App Design</h2>
-                    <p>Designing sleek, user-friendly mobile and desktop applications that balance creativity with functionality.</p>
-                    <a href="services.html">Learn more</a>
-                </div>
-            </div>
-        </div>
-     </div>
-     <!-- -------------portfolio------------- -->
-      <div id="portfolio">
-        <div class="container">
-            <h1 class="subtitle">My Work</h1>
-            <div class="work-list">
-                <div class="work">
-                    <img src="images/work-1.png" alt="">
-                    <div class="layer">
-                        <h3>Online-Shopping app</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem tempore ipsa alias qui. Tempore culpa delectus soluta, fuga quidem quo suscipit dolore debitis ad. Ipsam enim eaque delectus totam minima.</p>
-                        <a href=""><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="images/work-2.png" alt="">
-                    <div class="layer">
-                        <h3>Music App</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem tempore ipsa alias qui. Tempore culpa delectus soluta, fuga quidem quo suscipit dolore debitis ad. Ipsam enim eaque delectus totam minima.</p>
-                        <a href=""><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="images/work-3.png" alt="">
-                    <div class="layer">
-                        <h3>Movie Recommendation App</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem tempore ipsa alias qui. Tempore culpa delectus soluta, fuga quidem quo suscipit dolore debitis ad. Ipsam enim eaque delectus totam minima.</p>
-                        <a href=""><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
-                </div>
-            </div>
-            <a href="#" class="btn">See more</a>
-        </div>
+
+    <div class="lede">
+      <h1>I build systems where being wrong is expensive.</h1>
+    </div>
+
+    <p class="thesis">
+      Backend and full-stack engineer in Nairobi. Most of my work comes down to one
+      question: <b>who gets what, and can you prove it's right?</b> Rent ledgers that
+      have to balance. Task allocation that has to be defensible. Data models where
+      the bad state isn't guarded against — it's impossible to write.
+    </p>
+
+    <div class="ledger" aria-label="Three systems and the guarantee each one enforces">
+      <div class="ledger-row">
+        <span class="ledger-key">REMS</span>
+        <span class="ledger-val">A unit cannot be let twice, even under simultaneous requests — enforced by a partial unique index, not an <code>if</code> statement.</span>
+        <span class="ledger-fig">20 resources</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-key">EquiTask</span>
+        <span class="ledger-val">Every task recommendation explains itself, and admits when it has too little history to be confident.</span>
+        <span class="ledger-fig">5 scored inputs</span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-key">VHS Video Store</span>
+        <span class="ledger-val">Duplicate favourites aren't validated away; the document key makes them unrepresentable.</span>
+        <span class="ledger-fig">real-time</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main id="work">
+
+  <section class="band">
+    <div class="wrap">
+
+      <div class="band-head">
+        <h2>Three systems</h2>
+        <p>Each with the part that was actually hard, and the code that solved it.</p>
       </div>
 
-        <!-- ---------------contact----------------- -->
-    <div id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class="subtitle">Contact Me</h1>
-                    <p><i class="fa-solid fa-paper-plane"></i>Jayabjay2018@gmail.com</p>
-                    <p><i class="fa-solid fa-phone"></i>+254 110 834813</p>
-                    <div class="social-icons">
-                        <a href="https://github.com/Gabriel-Bjay"><i class="fa-brands fa-github"></i></a>
-                        <a href="https://www.instagram.com/wrldhates.makara/#"><i class="fa-brands fa-instagram"></i></i></a>
-                        <a href="www.linkedin.com/in/bjay-makara"><i class="fa-brands fa-linkedin"></i></a>
-                    </div>
-                    <a href="images/My CV.docx" download class="btn btn2">Download CV</a>
-                </div>
-                <div class="contact-right">
-                    <form name="">
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="Email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
-                        <input type="hidden" name="form_source" value="contact_page_1">
-                        <button type="submit" class="btn btn2">Submit</button>
-                    </form>
-                    <span id="msg"></span>
-                </div>
-            </div>
+      <!-- ============ REMS ============ -->
+      <article class="record">
+        <div class="record-body">
+          <h3>Property &amp; Rental Management System</h3>
+          <p class="record-sub">Multi-role platform for letting agencies · Laravel + Angular · 2026</p>
+
+          <p>
+            REMS covers the full tenancy lifecycle: an owner registers a property, units
+            are listed and approved, an agent drafts a tenancy, a tenant moves in, rent
+            is invoiced on a billing cycle, payments arrive and get reconciled against
+            those invoices, and deposits are refunded when the tenancy ends. Maintenance
+            tickets, vacate notices and agent commissions run alongside it — around twenty
+            REST resources, all behind token auth with role-gated permissions.
+          </p>
+
+          <p>
+            The domain is unforgiving in two specific ways. A unit let to two tenants at
+            once is a legal problem, not a bug report. And money that doesn't reconcile
+            is worse than no system at all.
+          </p>
+
+          <div class="hardpart">
+            <h4>Making double-letting impossible rather than unlikely</h4>
+            <p>
+              The obvious approach is to check for an existing active tenancy before
+              activating a new one. That check passes for both requests when two agents
+              activate at the same moment. So I moved the rule into the database:
+            </p>
+<pre><b>CREATE UNIQUE INDEX</b> uniq_active_tenancy_per_unit
+  <b>ON</b> tenancies (unit_id) <b>WHERE</b> status = 'active';</pre>
+            <p>
+              A partial unique index lets a unit accumulate any number of draft and ended
+              tenancies while permitting exactly one active row. The second request now
+              fails at the storage layer no matter how the two interleave; the controller
+              catches it and returns a clean 422. The invariant holds even if someone
+              later writes a script that bypasses my code entirely.
+            </p>
+            <p>
+              Payment allocation got the same treatment in application logic: an amount is
+              rejected unless it fits within both the payment's unallocated balance
+              <i>and</i> the invoice's outstanding balance. Invoice status is then derived
+              from the sum of allocations inside the same transaction — and when an
+              allocation moves between invoices, both get recalculated.
+            </p>
+          </div>
+
+          <p>
+            One decision I'd flag as deliberate: this backend uses Laravel's query builder
+            throughout rather than Eloquent, with only <code>User</code> and
+            <code>Role</code> as models. I wanted explicit SQL and no accidental N+1s or
+            lazy-loading surprises. The cost is real — no relationships, no casts, and
+            validation rules repeated between create and update — and it's a trade I'd
+            revisit on a larger team.
+          </p>
         </div>
-        <div class="copy-right">
-            <p> Copyright &copy; Bjay Makara<i class="fa-solid fa-heart"></i>. <br> All rights reserved.</p>
+
+        <aside class="spec">
+          <dl>
+            <div><dt>Backend</dt><dd>Laravel 13, PHP 8.3, Sanctum</dd></div>
+            <div><dt>Database</dt><dd>PostgreSQL</dd></div>
+            <div><dt>Frontend</dt><dd>Angular 22 — standalone components, signals, functional guards and interceptors, lazy routes</dd></div>
+            <div><dt>Grid</dt><dd>DevExtreme DataGrid over a custom REST store adapter</dd></div>
+            <div><dt>Deploy</dt><dd>Docker on Render (API), Vercel (SPA)</dd></div>
+            <div><dt>Testing</dt><dd>PHPUnit, Vitest</dd></div>
+          </dl>
+          <div class="spec-links">
+            <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/rems-backend">Backend code</a>
+            <a class="lnk" href="https://github.com/Gabriel-Bjay/rems-frontend">Frontend code</a>
+            <!-- TODO: replace with your Vercel URL, then delete the .pending span -->
+            <span class="pending">Live demo — coming</span>
+          </div>
+        </aside>
+      </article>
+
+      <!-- ============ EquiTask ============ -->
+      <article class="record">
+        <div class="record-body">
+          <h3>EquiTask</h3>
+          <p class="record-sub">Fair workload allocation · Django + React · Capstone, Riara University</p>
+
+          <p>
+            Task managers let you assign work, but they don't tell you whether you've been
+            fair about it. EquiTask recommends who should take each task, then measures
+            whether the resulting distribution was actually equitable — scoring every
+            candidate across skill match, current load, track record, fairness and urgency.
+          </p>
+
+          <p>
+            Building a system that ranks people meant the hard problems were statistical
+            and social rather than architectural. Two stand out.
+          </p>
+
+          <div class="hardpart">
+            <h4>Not trusting a small sample, and saying so</h4>
+            <p>
+              Someone who has completed two tasks on time doesn't have a 100% reliability
+              record — they have almost no record at all. Scoring them above a colleague
+              with forty solid completions would be indefensible. So performance scores
+              are shrunk toward a neutral prior in proportion to how much history exists:
+            </p>
+<pre>score = (n × observed + <b>K</b> × prior) / (n + <b>K</b>)
+<i># K = 5, prior = 0.6 — with n=2 the score</i>
+<i># sits near the prior; by n=40 it barely moves it</i></pre>
+            <p>
+              A separate confidence value, saturating at five recorded outcomes, travels
+              with each recommendation. And every recommendation carries a plain-language
+              rationale — which required skills matched, which are missing, roughly how
+              many hours that person is already carrying, and whether there's enough
+              history to trust the number. An allocation system nobody trusts is one
+              nobody uses, so it had to be able to justify itself.
+            </p>
+            <p>
+              The weights aren't hardcoded either. A scheduled job joins past
+              recommendations to their recorded outcomes, fits a logistic regression to
+              find which components genuinely predicted success, and saves a new versioned
+              weight set — refusing to train on fewer than fifty samples, on single-class
+              outcomes, or when nothing positively predicts success. It learns, and it
+              knows when not to.
+            </p>
+          </div>
+
+          <p>
+            Fairness itself is measured properly rather than eyeballed: a Gini coefficient
+            and coefficient of variation over the team's workload vector, with members
+            banded by their ratio to the team mean. Daily per-user metrics are precomputed
+            by a Celery job so the dashboard reads aggregates instead of recomputing
+            history on every load.
+          </p>
         </div>
+
+        <aside class="spec">
+          <dl>
+            <div><dt>Backend</dt><dd>Django 4.2, Django REST Framework, JWT</dd></div>
+            <div><dt>Async</dt><dd>Celery + Redis — scheduled metrics, deadline reminders, weight retraining</dd></div>
+            <div><dt>Modelling</dt><dd>scikit-learn, pandas, NumPy</dd></div>
+            <div><dt>Frontend</dt><dd>React 19, TypeScript, Redux Toolkit, MUI, Recharts</dd></div>
+            <div><dt>Docs</dt><dd>OpenAPI via drf-spectacular</dd></div>
+          </dl>
+          <div class="spec-links">
+            <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/Equitask--task-manager">View code</a>
+            <!-- TODO: deploy and link. Run seed_simulation first so the charts have data. -->
+            <span class="pending">Live demo — coming</span>
+          </div>
+        </aside>
+      </article>
+
+      <!-- ============ VHS ============ -->
+      <article class="record">
+        <div class="record-body">
+          <h3>VHS Video Store</h3>
+          <p class="record-sub">Movie discovery with an 80s aesthetic · Next.js + Firebase · 2026</p>
+
+          <p>
+            A movie discovery app built to look like it came off a rental shelf in 1987 —
+            CRT scanlines, film grain and a slow flicker, all in CSS rather than image
+            overlays. Underneath it: TMDB search and trending, movie detail pages,
+            real-time favourites, and multiple named watchlists with live counts.
+          </p>
+
+          <div class="hardpart">
+            <h4>Choosing a document key so duplicates can't exist</h4>
+            <p>
+              Favourites and watchlist items are stored under per-user subtrees, using each
+              movie's TMDB id as the Firestore document id:
+            </p>
+<pre>users/{uid}/favorites/{movieId}
+users/{uid}/watchlists/{listId}/items/{movieId}</pre>
+            <p>
+              With an auto-generated id I'd have needed a query-then-write to avoid adding
+              the same film twice, which races. Keying on the movie id instead makes
+              toggling naturally idempotent and duplicates structurally unrepresentable —
+              the same instinct as the database index in REMS, applied to a document store.
+            </p>
+            <p>
+              List counts are maintained with atomic increments rather than counting
+              documents on read, so a watchlist costs one read regardless of size. Updates
+              arrive through snapshot listeners rather than polling, each cleaned up on
+              unmount. Ownership is enforced in Firestore security rules, so it's a real
+              boundary rather than a UI assumption.
+            </p>
+          </div>
+
+          <p>
+            The app also documents itself: an in-app page renders the system architecture
+            as a diagram, which turned out to be the fastest way to explain the project to
+            anyone new.
+          </p>
+        </div>
+
+        <aside class="spec">
+          <dl>
+            <div><dt>Framework</dt><dd>Next.js 16, App Router, React 19</dd></div>
+            <div><dt>Language</dt><dd>TypeScript</dd></div>
+            <div><dt>Styling</dt><dd>Tailwind v4 with a custom VHS design system</dd></div>
+            <div><dt>Data</dt><dd>Firebase Auth (email + Google), Firestore real-time</dd></div>
+            <div><dt>API</dt><dd>TMDB</dd></div>
+          </dl>
+          <div class="spec-links">
+            <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/VHS-Video-Store">View code</a>
+            <!-- TODO: Vercel deploy is ~5 minutes for this one. -->
+            <span class="pending">Live demo — coming</span>
+          </div>
+        </aside>
+      </article>
+
     </div>
-    <script>
+  </section>
 
-        var tablinks = document.getElementsByClassName('tab-links');
-        var tabcontents = document.getElementsByClassName('tab-contents');
+  <!-- ============ about ============ -->
+  <section class="band" id="about">
+    <div class="wrap">
 
-        function opentab(tabname){
-            for (tablink of tablinks){ 
-                tablink.classList.remove('active-link');
-            }
-            for (tabcontent of tabcontents){
-                tabcontent.classList.remove('active-tab');
-            }
-            event.currentTarget.classList.add('active-link');
-            document.getElementById(tabname).classList.add('active-tab');
-        }
-    </script>
-    <script>
-        var sideMenu = document.getElementById('sideMenu');
+      <div class="band-head">
+        <h2>Background</h2>
+      </div>
 
-        function openMenu(){
-            sideMenu.style.right = '0';
-        }
-        function closeMenu(){
-            sideMenu.style.right = '-200px';
-        }
-    </script>
+      <div class="about-grid">
+        <div>
+          <p>
+            I'm finishing a Computer Science degree at Riara University in Nairobi, after
+            a full-stack certificate at Zindua School. Most of what I know about building
+            software came from the gap between those two: coursework taught me why a
+            normalised schema matters, and shipping taught me what happens at 2am when it
+            isn't one.
+          </p>
+          <p>
+            I gravitate toward backend work — domain modelling, transactional integrity,
+            the places where a system has to be right rather than merely responsive. I like
+            problems where correctness is checkable: a ledger either balances or it doesn't.
+            That said, I build and ship the front end too, in Angular, React and Next.js,
+            because a backend nobody can see is difficult to argue for.
+          </p>
+          <p>
+            Currently looking for a role where I can work on systems with real data and
+            real consequences, alongside people who will tell me when I'm wrong.
+          </p>
+        </div>
+
+        <aside>
+          <dl class="facts">
+            <div><dt>Based in</dt><dd>Nairobi, Kenya</dd></div>
+            <div><dt>Studying</dt><dd>BSc Computer Science, Riara University</dd></div>
+            <div><dt>Also</dt><dd>Full-Stack Development, Zindua School</dd></div>
+            <div><dt>Backend</dt><dd>PHP/Laravel, Python/Django, PostgreSQL, MySQL, REST, Docker</dd></div>
+            <div><dt>Frontend</dt><dd>TypeScript, Angular, React, Next.js, Tailwind</dd></div>
+            <div><dt>Also handy</dt><dd>Celery, Redis, Firebase, scikit-learn, Git</dd></div>
+          </dl>
+          <div class="spec-links">
+            <!-- TODO: export your CV as PDF, put it in the repo root, update this href -->
+            <a class="lnk" href="Bjay-Makara-CV.pdf" download>Download CV (PDF)</a>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ contact ============ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+
+    <h2>Get in touch</h2>
+    <p>
+      Open to backend and full-stack roles, and happy to talk through any of the
+      decisions above in more detail. Email is the surest way to reach me.
+    </p>
+
+    <dl class="reach">
+      <div>
+        <dt>Email</dt>
+        <dd><a href="mailto:Jayabjay2018@gmail.com">Jayabjay2018@gmail.com</a></dd>
+      </div>
+      <div>
+        <dt>Phone</dt>
+        <dd><a href="tel:+254110834813">+254 110 834813</a></dd>
+      </div>
+      <div>
+        <dt>GitHub</dt>
+        <dd><a href="https://github.com/Gabriel-Bjay">Gabriel-Bjay</a></dd>
+      </div>
+      <div>
+        <dt>LinkedIn</dt>
+        <dd><a href="https://www.linkedin.com/in/bjay-makara">bjay-makara</a></dd>
+      </div>
+    </dl>
+
+    <div class="foot">
+      <span>© 2026 Bjay Makara</span>
+      <span>Built by hand. No framework, no build step.</span>
+    </div>
+
+  </div>
+</section>
+
 </body>
 </html>
