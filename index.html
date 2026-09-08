@@ -229,6 +229,26 @@
     .record{grid-template-columns:1fr;gap:2rem}
   }
 
+  /* full-width screenshot, framed like a browser window */
+  .shot{
+    grid-column:1/-1;
+    margin:0 0 .5rem;
+    border:1px solid #C8D0CE;
+    background:var(--paper-warm);
+  }
+  .shot-chrome{
+    display:flex;align-items:center;gap:.6rem;
+    padding:.55rem .75rem;
+    border-bottom:1px solid #C8D0CE;
+  }
+  .shot-dot{width:.55rem;height:.55rem;border-radius:50%;background:#C3CBC9}
+  .shot-url{
+    margin-left:.5rem;
+    font-size:.75rem;color:var(--ink-soft);
+    font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  .shot img{width:100%;display:block}
+
   /* per-project accent — a thread of colour through an otherwise monochrome layout */
   .record.rems{--accent:var(--verdigris)}
   .record.equitask{--accent:var(--rose)}
@@ -623,6 +643,13 @@
 
       <!-- ============ VHS ============ -->
       <article class="record vhs">
+        <figure class="shot">
+          <div class="shot-chrome">
+            <span class="shot-dot"></span><span class="shot-dot"></span><span class="shot-dot"></span>
+            <span class="shot-url">vhs-video-store.vercel.app</span>
+          </div>
+          <img src="images/vhs-screenshot.jpg" alt="VHS Video Store home page — trending movies grid on a neon 80s-themed dark UI" loading="lazy" width="1280" height="633">
+        </figure>
         <div class="record-body">
           <h3>VHS Video Store</h3>
           <p class="record-sub">Movie discovery with an 80s aesthetic · Next.js + Firebase · 2026</p>
