@@ -166,6 +166,7 @@
   .ledger-row:nth-child(1){animation-delay:.1s}
   .ledger-row:nth-child(2){animation-delay:.22s}
   .ledger-row:nth-child(3){animation-delay:.34s}
+  .ledger-row:nth-child(4){animation-delay:.46s}
 
   @keyframes settle{
     from{opacity:0;transform:translateY(6px)}
@@ -253,6 +254,7 @@
   .record.rems{--accent:var(--verdigris)}
   .record.equitask{--accent:var(--rose)}
   .record.vhs{--accent:var(--vhs-pink)}
+  .record.prc{--accent:var(--brass)}
 
   .record h3{position:relative;padding-left:1.05rem}
   .record h3::before{
@@ -465,7 +467,7 @@
       the bad state isn't guarded against — it's impossible to write.
     </p>
 
-    <div class="ledger" aria-label="Three systems and the guarantee each one enforces">
+    <div class="ledger" aria-label="Four systems and the guarantee each one enforces">
       <div class="ledger-row">
         <span class="ledger-key">REMS</span>
         <span class="ledger-val">A unit cannot be let twice, even under simultaneous requests — enforced by a partial unique index, not an <code>if</code> statement.</span>
@@ -481,6 +483,11 @@
         <span class="ledger-val">Duplicate favourites aren't validated away; the document key makes them unrepresentable.</span>
         <span class="ledger-fig">real-time</span>
       </div>
+      <div class="ledger-row">
+        <span class="ledger-key">PR Concierge</span>
+        <span class="ledger-val">Runs on every push without adding noise: one checklist comment edited in place, and reminders that can't repeat, with no database.</span>
+        <span class="ledger-fig">GitHub App</span>
+      </div>
     </div>
 
   </div>
@@ -492,7 +499,7 @@
     <div class="wrap">
 
       <div class="band-head">
-        <h2>Three systems</h2>
+        <h2>Four systems</h2>
         <p>Each with the part that was actually hard, and the code that solved it.</p>
       </div>
 
@@ -567,6 +574,7 @@
             <div><dt>Grid</dt><dd>DevExtreme DataGrid over a custom REST store adapter</dd></div>
             <div><dt>Deploy</dt><dd>Docker on Render (API), Vercel (SPA)</dd></div>
             <div><dt>Testing</dt><dd>PHPUnit, Vitest</dd></div>
+            <div><dt>Demo</dt><dd>One-click owner, agent and tenant accounts on the sign-in page, over a year of sample billing history</dd></div>
           </dl>
           <div class="spec-links">
             <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/rems-backend">Backend code</a>
@@ -635,15 +643,15 @@
         <aside class="spec">
           <dl>
             <div><dt>Backend</dt><dd>Django 4.2, Django REST Framework, JWT</dd></div>
-            <div><dt>Async</dt><dd>Celery + Redis — scheduled metrics, deadline reminders, weight retraining</dd></div>
+            <div><dt>Async</dt><dd>Celery + Redis locally, a scheduled GitHub Actions workflow in production — metrics, deadline reminders, weight retraining</dd></div>
             <div><dt>Modelling</dt><dd>scikit-learn, pandas, NumPy</dd></div>
             <div><dt>Frontend</dt><dd>React 19, TypeScript, Redux Toolkit, MUI, Recharts</dd></div>
             <div><dt>Docs</dt><dd>OpenAPI via drf-spectacular</dd></div>
+            <div><dt>Deploy</dt><dd>Render (API), Vercel (SPA), Neon PostgreSQL</dd></div>
           </dl>
           <div class="spec-links">
             <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/Equitask--task-manager">View code</a>
-            <!-- TODO: deploy and link. Run seed_simulation first so the charts have data. -->
-            <span class="pending">Live demo — coming</span>
+            <a class="lnk lnk-live" href="https://equitask-task-manager.vercel.app" target="_blank" rel="noopener">Live demo</a>
           </div>
         </aside>
       </article>
@@ -709,6 +717,61 @@ users/{uid}/watchlists/{listId}/items/{movieId}</pre>
           <div class="spec-links">
             <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/VHS-Video-Store">View code</a>
             <a class="lnk lnk-live" href="https://vhs-video-store.vercel.app" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </aside>
+      </article>
+
+      <!-- ============ PR Concierge ============ -->
+      <article class="record prc">
+        <div class="record-body">
+          <h3>PR Concierge</h3>
+          <p class="record-sub">GitHub App for reviewable pull requests · TypeScript + Octokit · 2026</p>
+
+          <p>
+            Reviews stall for boring reasons: a pull request is too big to read in one
+            sitting, doesn't say why it exists, or waits on a reviewer who has forgotten it.
+            PR Concierge labels every pull request by size, ignoring lockfiles and generated
+            files, keeps a short checklist of what's missing, and nudges reviewers when a
+            review has gone quiet. Each repository can tune or switch off any feature with
+            a YAML file.
+          </p>
+
+          <div class="hardpart">
+            <h4>Useful on every push without becoming noise</h4>
+            <p>
+              The app re-runs whenever a pull request changes. Posting a fresh comment each
+              time would bury the conversation, so the checklist is a single comment that the
+              app finds again by a hidden marker and edits in place:
+            </p>
+<pre>&lt;!-- pr-concierge:checklist --&gt;
+<i># found by its marker: edited only if the text changed</i>
+<i># not there yet and everything passes: stay quiet</i></pre>
+            <p>
+              Pull requests that are already in good shape never get a comment, and an
+              unchanged checklist costs no write at all. Reminders use the same idea without
+              a database: a pull request is stale when it hasn't been touched for a few days,
+              and posting the reminder counts as a touch, so each one is nudged at most once
+              per stale period. Keeping the app stateless is what lets it run as a single
+              serverless function on Vercel's free plan.
+            </p>
+          </div>
+
+          <p>
+            Setup takes one click: a local page registers the app through GitHub's manifest
+            flow and saves its credentials, so nobody copies keys between browser tabs.
+          </p>
+        </div>
+
+        <aside class="spec">
+          <dl>
+            <div><dt>Platform</dt><dd>GitHub App — pull request webhooks, REST and GraphQL</dd></div>
+            <div><dt>Language</dt><dd>TypeScript on Node.js 22, Octokit</dd></div>
+            <div><dt>Deploy</dt><dd>Vercel serverless function with Vercel Cron, or Docker</dd></div>
+            <div><dt>Testing</dt><dd>Vitest — unit tests and end-to-end webhook tests against a stand-in GitHub API</dd></div>
+          </dl>
+          <div class="spec-links">
+            <a class="lnk lnk-fill" href="https://github.com/Gabriel-Bjay/pr-concierge">View code</a>
+            <a class="lnk lnk-live" href="https://pr-concierge.vercel.app" target="_blank" rel="noopener">Live site</a>
           </div>
         </aside>
       </article>
