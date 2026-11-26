@@ -1,13 +1,25 @@
 # Resume-Portfolio
 
-Personal portfolio site for Bjay Makara — Backend & Systems Engineer. Showcases projects (REMS, Equitask, VHS-Video-Store) alongside a CV download and contact links.
+Personal portfolio for Bjay Makara, backend and full-stack developer in Nairobi.
+Live at https://gabriel-bjay.github.io/Resume-Portfolio/
 
-It's a single static HTML file with inline CSS and an inline SVG favicon — no build step, no external assets, no dependencies beyond Google Fonts loaded via CDN.
+The site is drawn as an engineering drawing set: seven numbered sheets with a drawing
+register, title blocks, and a detail drawing for the hard part of each project
+(REMS, EquiTask, PR Concierge, VHS Video Store). Light mode is a blueline print,
+dark mode is a cyanotype, and actions are in red pencil. It also prints as a CV.
+
+It is a single static `index.html` with inline CSS and JS. No framework, no build step.
+Fonts are self-hosted in `fonts/` (Archivo, Atkinson Hyperlegible, JetBrains Mono, all
+under the SIL Open Font License; licence files are next to them).
+
+See `DESIGN.md` for the visual rules and `PRODUCT.md` for who the site is for.
 
 ## Running locally
 
-Open `index.html` directly in a browser, or serve the directory with any static file server, e.g.:
+Serve the folder with any static file server, for example:
 
 ```bash
-npx serve .
+python3 -m http.server 8000
 ```
+
+Then open http://localhost:8000.

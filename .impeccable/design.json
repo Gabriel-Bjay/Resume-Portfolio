@@ -1,0 +1,16 @@
+{
+  "concept": "engineering drawing set",
+  "themes": {
+    "light": { "name": "blueline print", "paper": "#F2F5F8", "line": "#1F4E8C", "lineSoft": "#9DB3CF", "ink": "#102340", "inkSoft": "#4A5E78", "pencil": "#C2352B", "ok": "#1F6E4A" },
+    "dark": { "name": "cyanotype", "paper": "#11325E", "line": "#E9F0F8", "lineSoft": "#5E7FA8", "ink": "#E9F0F8", "inkSoft": "#B3C6DD", "pencil": "#FF8A7A", "ok": "#8FE0B5" }
+  },
+  "fonts": { "display": "Archivo", "body": "Atkinson Hyperlegible", "mono": "JetBrains Mono" },
+  "rules": [
+    "red pencil only for actions and corrections",
+    "no em dashes",
+    "no ornaments on buttons",
+    "code ligatures off",
+    "figure text at least 13px in a viewBox no wider than 372",
+    "only Detail A animates, and it respects reduced motion"
+  ]
+}
